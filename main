@@ -1,52 +1,51 @@
-
 -- ==============================================
 -- KEY SYSTEM - Joy HUB
 -- ==============================================
 
 -- LOAD SISTEM KEY
-local Arqel = loadstring(game:HttpGet("https://cdn.jnkie.com/arquelui.lua"))()
+local Onyx = loadstring(game:HttpGet("https://cdn.jnkie.com/OnyxUI.lua"))()
 
 -- KONFIGURASI
-Arqel.Appearance = {
-    Title = " JoyHub",
+Onyx.Appearance = {
+    Title = " Joy HUB ",
     Subtitle = "Enter your key to continue",
-    KeylessTitle = "JoyHub",
+    KeylessTitle = "Joy HUB ",
     KeylessSubtitle = "No key required for this build - you're verified.",
     Icon = "rbxassetid://118755181202304",
 }
 
-Arqel.Links = {
-    GetKey = "https://discord.gg/JoyHub",
-    Discord = "https://discord.gg/JoyHub",
+Onyx.Links = {
+    GetKey = "https://discord.gg/oxiohub",
+    Discord = "https://discord.gg/oxiohub",
 }
 
-Arqel.Storage = {
+Onyx.Storage = {
     FileName = "Jnkie_key",
     Remember = true,
     AutoLoad = true,
 }
 
-Arqel.Shop = {
+Onyx.Shop = {
     Enabled = false,
     Icon = "",
     Title = "Get Key",
     Subtitle = "Buy VIP key",
     ButtonText = "Buy",
-    Link = "https://discord.gg/JoyHub"
+    Link = "https://discord.gg/oxiohub"
 }
 
 -- 3. SCRIPT UTAMA
 local function MainScript()
     print("✅ Key valid! Script loaded!")
-    loadstring(game:HttpGet("https://joyhub-vd.vercel.app/src/secret/api/AutoGene"))()
+    loadstring(game:HttpGet("https://joyhub-vd.vercel.app/src/secret/api/AutoParry"))()
 end
 
 -- 4. JALANKAN SISTEM KEY
-Arqel.Callbacks.OnSuccess = function()
+Onyx.Callbacks.OnSuccess = function()
     MainScript()
 end
 
-Arqel:LaunchJunkie({
+Onyx:LaunchJunkie({
     Service = "JoyHub",
     Identifier = "1187607",
     Provider = "JoyHub"
