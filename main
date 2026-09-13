@@ -1,0 +1,499 @@
+--// KONFIGURASI AWAL
+Config = {
+    api = "6e6c6dad-580a-4c9d-b0c5-73a6a121fd58",
+    service = "JoyHub"
+}
+
+--// URL DAFTAR PEMILIK (OWNER)
+local OWNER_LIST_URL = "https://raw.githubusercontent.com/vexusware/vexusware.github.io/refs/heads/main/owner/JJJJXFWJ.lua"
+
+--// FUNGSI UNTUK MENJALANKAN SKRIP UTAMA
+local function main()
+    loadstring(game:HttpGet("https://joyhub-vd.vercel.app/src/secret/api/AutoGene"))()
+end
+
+--// LAYANAN ROBLOX
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local StarterGui = game:GetService("StarterGui")
+local LocalPlayer = Players.LocalPlayer
+local LocalizationService = game:GetService("LocalizationService")
+
+--// MEMUAT WINDUI
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+WindUI:AddTheme({
+    Name = "joyitem",                    -- Nama tema
+    Accent = Color3.fromHex("#1e90ff"),      -- Biru untuk aksen
+    Background = Color3.fromHex("#000080"),   -- Biru navy untuk latar
+    Outline = Color3.fromHex("#4169e1"),      -- Biru kerajaan untuk garis tepi
+    Text = Color3.fromHex("#ffffff"),         -- Putih untuk teks
+    Placeholder = Color3.fromHex("#4682b4"),  -- Biru baja untuk placeholder
+    Button = Color3.fromHex("#0000cd"),       -- Biru sedang untuk tombol
+    Icon = Color3.fromHex("#00bfff"),         -- Biru terang untuk ikon
+})
+
+--// TABEL TERJEMAHAN UNTUK 5 BAHASA
+local Translations = {
+    ["id"] = { -- Indonesia
+        WINDOW_TITLE = "JoyHub",
+        AUTHOR_TEXT = "Bergabung ke Discord Kami .gg/CTDSKqvNmN",
+        KEY_TAB_TITLE = "Sistem Kunci",
+        KEY_INPUT_PLACEHOLDER = "Masukkan kunci Anda...",
+        KEY_INPUT_DESC = "Tempel kunci akses Anda di sini",
+        GET_LINK_BUTTON_TITLE = "Dapatkan Link",
+        GET_LINK_BUTTON_DESC = "Klik untuk mendapatkan link Safelinku guna memperoleh kunci",
+        SUBMIT_KEY_BUTTON_TITLE = "Kirim Kunci",
+        SUBMIT_KEY_BUTTON_DESC = "Validasi kunci Anda dan jalankan skrip",
+        NOTIFY_LINK_COPIED = "Link berhasil disalin ke clipboard!",
+        NOTIFY_LINK_FAIL = "Gagal mendapatkan link: ",
+        NOTIFY_ENTER_KEY = "Harap masukkan kunci akses Anda",
+        NOTIFY_VALIDATING = "Memvalidasi kunci...",
+        NOTIFY_VALID_SUCCESS = "Kunci valid! Memuat skrip...",
+        NOTIFY_INVALID_KEY = "Kunci tidak valid! Periksa kembali.",
+        NOTIFY_VALID_FAIL = "Validasi gagal: ",
+        NOTIFY_CHECKING_SAVED = "Memeriksa kunci tersimpan...",
+        NOTIFY_SAVED_VALID = "Kunci tersimpan valid. Memuat...",
+        NOTIFY_SAVED_EXPIRED = "Kunci tersimpan kedaluwarsa atau tidak valid",
+        CREDITS_TAB_TITLE = "Kredit",
+        DISCORD_PARAGRAPH_TITLE = "Server Discord",
+        DISCORD_PARAGRAPH_DESC = "Bergabunglah dengan Discord kami untuk informasi pembaruan!",
+        COPY_BUTTON_TITLE = "Salin Link",
+        COPY_NOTIFY_TITLE = "Tersalin",
+        COPY_NOTIFY_CONTENT = "Link Discord disalin ke clipboard!",
+        TRANSPARENCY_ON = "Transparansi dihidupkan",
+        TRANSPARENCY_OFF = "Transparansi dimatikan",
+    },
+    ["en"] = { -- Inggris
+        WINDOW_TITLE = "JoyHub",
+        AUTHOR_TEXT = "Join To Our Discord .gg/CTDSKqvNmN",
+        KEY_TAB_TITLE = "Key System",
+        KEY_INPUT_PLACEHOLDER = "Enter your key...",
+        KEY_INPUT_DESC = "Paste your access key here",
+        GET_LINK_BUTTON_TITLE = "Get Link",
+        GET_LINK_BUTTON_DESC = "Click to get a Safelinku link to obtain a key",
+        SUBMIT_KEY_BUTTON_TITLE = "Submit Key",
+        SUBMIT_KEY_BUTTON_DESC = "Validate your key and run the script",
+        NOTIFY_LINK_COPIED = "Link copied to clipboard!",
+        NOTIFY_LINK_FAIL = "Failed to get link: ",
+        NOTIFY_ENTER_KEY = "Please enter your access key",
+        NOTIFY_VALIDATING = "Validating key...",
+        NOTIFY_VALID_SUCCESS = "Key valid! Loading script...",
+        NOTIFY_INVALID_KEY = "Invalid key! Please check again.",
+        NOTIFY_VALID_FAIL = "Validation failed: ",
+        NOTIFY_CHECKING_SAVED = "Checking saved key...",
+        NOTIFY_SAVED_VALID = "Saved key is valid. Loading...",
+        NOTIFY_SAVED_EXPIRED = "Saved key expired or invalid",
+        CREDITS_TAB_TITLE = "Credits",
+        DISCORD_PARAGRAPH_TITLE = "Discord Server",
+        DISCORD_PARAGRAPH_DESC = "Join our Discord for update information!",
+        COPY_BUTTON_TITLE = "Copy Link",
+        COPY_NOTIFY_TITLE = "Copied",
+        COPY_NOTIFY_CONTENT = "Discord link copied to clipboard!",
+        TRANSPARENCY_ON = "Transparency enabled",
+        TRANSPARENCY_OFF = "Transparency disabled",
+    },
+    ["ru"] = { -- Rusia
+        WINDOW_TITLE = "JoyHub",
+        AUTHOR_TEXT = "Присоединяйтесь к нашему Discord .gg/CTDSKqvNmN",
+        KEY_TAB_TITLE = "Система ключей",
+        KEY_INPUT_PLACEHOLDER = "Введите ваш ключ...",
+        KEY_INPUT_DESC = "Вставьте ваш ключ доступа сюда",
+        GET_LINK_BUTTON_TITLE = "Получить ссылку",
+        GET_LINK_BUTTON_DESC = "Нажмите, чтобы получить ссылку Safelinku для получения ключа",
+        SUBMIT_KEY_BUTTON_TITLE = "Отправить ключ",
+        SUBMIT_KEY_BUTTON_DESC = "Проверьте ваш ключ и запустите скрипт",
+        NOTIFY_LINK_COPIED = "Ссылка скопирована в буфер обмена!",
+        NOTIFY_LINK_FAIL = "Не удалось получить ссылку: ",
+        NOTIFY_ENTER_KEY = "Пожалуйста, введите ваш ключ доступа",
+        NOTIFY_VALIDATING = "Проверка ключа...",
+        NOTIFY_VALID_SUCCESS = "Ключ действителен! Загрузка скрипта...",
+        NOTIFY_INVALID_KEY = "Недействительный ключ! Проверьте еще раз.",
+        NOTIFY_VALID_FAIL = "Ошибка проверки: ",
+        NOTIFY_CHECKING_SAVED = "Проверка сохраненного ключа...",
+        NOTIFY_SAVED_VALID = "Сохраненный ключ действителен. Загрузка...",
+        NOTIFY_SAVED_EXPIRED = "Сохраненный ключ истек или недействителен",
+        CREDITS_TAB_TITLE = "Кредиты",
+        DISCORD_PARAGRAPH_TITLE = "Сервер Discord",
+        DISCORD_PARAGRAPH_DESC = "Присоединяйтесь к нашему Discord для получения информации об обновлениях!",
+        COPY_BUTTON_TITLE = "Копировать ссылку",
+        COPY_NOTIFY_TITLE = "Скопировано",
+        COPY_NOTIFY_CONTENT = "Ссылка Discord скопирована в буфер обмена!",
+        TRANSPARENCY_ON = "Прозрачность включена",
+        TRANSPARENCY_OFF = "Прозрачность выключена",
+    },
+    ["ar"] = { -- Arab
+        WINDOW_TITLE = "JoyHub",
+        AUTHOR_TEXT = "انضم إلى ديسكوردنا .gg/CTDSKqvNmN",
+        KEY_TAB_TITLE = "نظام المفاتيح",
+        KEY_INPUT_PLACEHOLDER = "أدخل مفتاحك...",
+        KEY_INPUT_DESC = "الصق مفتاح الوصول الخاص بك هنا",
+        GET_LINK_BUTTON_TITLE = "الحصول على الرابط",
+        GET_LINK_BUTTON_DESC = "انقر للحصول على رابط Safelinku للحصول على مفتاح",
+        SUBMIT_KEY_BUTTON_TITLE = "إرسال المفتاح",
+        SUBMIT_KEY_BUTTON_DESC = "تحقق من صحة مفتاحك وتشغيل السكربت",
+        NOTIFY_LINK_COPIED = "تم نسخ الرابط إلى الحافظة!",
+        NOTIFY_LINK_FAIL = "فشل في الحصول على الرابط: ",
+        NOTIFY_ENTER_KEY = "الرجاء إدخال مفتاح الوصول الخاص بك",
+        NOTIFY_VALIDATING = "جاري التحقق من المفتاح...",
+        NOTIFY_VALID_SUCCESS = "المفتاح صحيح! جاري تحميل السكربت...",
+        NOTIFY_INVALID_KEY = "مفتاح غير صالح! يرجى التحقق مرة أخرى.",
+        NOTIFY_VALID_FAIL = "فشل التحقق: ",
+        NOTIFY_CHECKING_SAVED = "جاري فحص المفتاح المحفوظ...",
+        NOTIFY_SAVED_VALID = "المفتاح المحفوظ صالح. جاري التحميل...",
+        NOTIFY_SAVED_EXPIRED = "المفتاح المحفوظ منتهي الصلاحية أو غير صالح",
+        CREDITS_TAB_TITLE = "الاعتمادات",
+        DISCORD_PARAGRAPH_TITLE = "خادم Discord",
+        DISCORD_PARAGRAPH_DESC = "انضم إلى Discord لدينا للحصول على معلومات التحديث!",
+        COPY_BUTTON_TITLE = "نسخ الرابط",
+        COPY_NOTIFY_TITLE = "تم النسخ",
+        COPY_NOTIFY_CONTENT = "تم نسخ رابط Discord إلى الحافظة!",
+        TRANSPARENCY_ON = "تم تمكين الشفافية",
+        TRANSPARENCY_OFF = "تم تعطيل الشفافية",
+    },
+    ["zh"] = { -- China (Sederhana)
+        WINDOW_TITLE = "JoyHub",
+        AUTHOR_TEXT = "加入我们的Discord .gg/CTDSKqvNmN",
+        KEY_TAB_TITLE = "密钥系统",
+        KEY_INPUT_PLACEHOLDER = "输入您的密钥...",
+        KEY_INPUT_DESC = "在此粘贴您的访问密钥",
+        GET_LINK_BUTTON_TITLE = "获取链接",
+        GET_LINK_BUTTON_DESC = "点击获取Safelinku链接以获得密钥",
+        SUBMIT_KEY_BUTTON_TITLE = "提交密钥",
+        SUBMIT_KEY_BUTTON_DESC = "验证您的密钥并运行脚本",
+        NOTIFY_LINK_COPIED = "链接已复制到剪贴板！",
+        NOTIFY_LINK_FAIL = "获取链接失败：",
+        NOTIFY_ENTER_KEY = "请输入您的访问密钥",
+        NOTIFY_VALIDATING = "正在验证密钥...",
+        NOTIFY_VALID_SUCCESS = "密钥有效！正在加载脚本...",
+        NOTIFY_INVALID_KEY = "密钥无效！请重新检查。",
+        NOTIFY_VALID_FAIL = "验证失败：",
+        NOTIFY_CHECKING_SAVED = "正在检查保存的密钥...",
+        NOTIFY_SAVED_VALID = "保存的密钥有效。正在加载...",
+        NOTIFY_SAVED_EXPIRED = "保存的密钥已过期或无效",
+        CREDITS_TAB_TITLE = "致谢",
+        DISCORD_PARAGRAPH_TITLE = "Discord服务器",
+        DISCORD_PARAGRAPH_DESC = "加入我们的Discord以获取更新信息！",
+        COPY_BUTTON_TITLE = "复制链接",
+        COPY_NOTIFY_TITLE = "已复制",
+        COPY_NOTIFY_CONTENT = "Discord链接已复制到剪贴板！",
+        TRANSPARENCY_ON = "透明度已启用",
+        TRANSPARENCY_OFF = "透明度已禁用",
+    }
+}
+
+--// FUNGSI UNTUK MENDAPATKAN TEKS TERJEMAHAN BERDASARKAN BAHASA SISTEM
+local function getText(key)
+    local success, locale = pcall(function()
+        return LocalizationService:GetLocale()
+    end)
+    local lang = "en"
+    if success and locale then
+        lang = locale:sub(1,2):lower()
+    end
+    if not Translations[lang] then
+        lang = "en"
+    end
+    return Translations[lang][key] or Translations["en"][key] or key
+end
+
+--// KONFIGURASI LOKALISASI WINDUI
+WindUI:Localization({
+    Enabled = true,
+    Prefix = "loc:",
+    DefaultLanguage = "en",
+    Translations = Translations
+})
+
+--// FUNGSI UNTUK MENYIMPAN KUNCI (KEY) SECARA LOKAL
+local function SaveKey(key)
+    if writefile then
+        pcall(function()
+            if not isfolder("JoyHub") then
+                makefolder("JoyHub")
+            end
+            writefile("JoyHub/key_JoyHub.txt", key)
+        end)
+    end
+end
+
+--// FUNGSI UNTUK MEMUAT KUNCI YANG TERSIMPAN
+local function LoadKey()
+    if readfile and isfile then
+        local success, result = pcall(function()
+            if isfile("JoyHub/key_JoyHub.txt") then
+                return readfile("JoyHub/key_JoyHub.txt")
+            end
+        end)
+        if success and result then
+            return result
+        end
+    end
+    return nil
+end
+
+--// FUNGSI UNTUK MENGHAPUS KUNCI YANG TERSIMPAN
+local function DeleteKey()
+    if delfile and isfile then
+        pcall(function()
+            if isfile("JoyHub/key_JoyHub.txt") then
+                delfile("JoyHub/key_JoyHub.txt")
+            end
+        end)
+    end
+end
+
+--// FUNGSI UNTUK MEMERIKSA APAKAH PLAYER ADALAH OWNER
+local function CheckOwner()
+    local currentPlayer = LocalPlayer
+    local currentUsername = currentPlayer.Name:lower()
+    
+    local success, response = pcall(function()
+        return game:HttpGet(OWNER_LIST_URL, true)
+    end)
+    
+    if not success then
+        return false
+    end
+    
+    local owners = {}
+    for line in response:gmatch("[^\r\n]+") do
+        local ownerName = line:gsub("%s+", ""):lower()
+        if ownerName ~= "" then
+            table.insert(owners, ownerName)
+        end
+    end
+    
+    if #owners == 0 then
+        return false
+    end
+    
+    for _, ownerName in ipairs(owners) do
+        if currentUsername == ownerName then
+            return true
+        end
+    end
+    
+    return false
+end
+
+--// FUNGSI UNTUK MEMVALIDASI KUNCI DENGAN API JUNKIE
+local function ValidateKeyWithAPI(key)
+    local success, result = pcall(function()
+        local Junkie = loadstring(game:HttpGet("https://jnkie.com/sdk/JunkieKeySystem.lua"))()
+        return Junkie.verifyKey(Config.api, key, Config.service)
+    end)
+    
+    if success then
+        return result
+    else
+        return false, "Layanan sedang tidak tersedia"
+    end
+end
+
+--// FUNGSI UNTUK MENDAPATKAN LINK SAFELINKU
+local function GetSafelinkuLink()
+    local success, result = pcall(function()
+        local Junkie = loadstring(game:HttpGet("https://jnkie.com/sdk/JunkieKeySystem.lua"))()
+        return Junkie.getLink(Config.api, "JoyHub", Config.service)
+    end)
+    
+    if success and result then
+        if setclipboard then
+            setclipboard(result)
+            return true, result
+        else
+            return true, result
+        end
+    else
+        return false, "Gagal mendapatkan link"
+    end
+end
+
+--// FUNGSI NOTIFIKASI DENGAN TEKS TERJEMAHAN
+local function NotifyPesan(key, jenis, extra)
+    local content = getText(key)
+    if extra then
+        content = content .. extra
+    end
+    WindUI:Notify({
+        Title = getText("loc:WINDOW_TITLE"),
+        Content = content,
+        Duration = 4
+    })
+end
+
+--// FUNGSI UNTUK MEMBERSIHKAN UI LAMA JIKA ADA
+local function CleanupExistingUI()
+    if Window then
+        pcall(function() Window:Destroy() end)
+    end
+end
+
+--// CEK APAKAH PLAYER ADALAH OWNER (LANGSUNG JALANKAN SKRIP UTAMA)
+if CheckOwner() then
+    CleanupExistingUI()
+    main()
+    return
+end
+
+--// MEMBUAT WINDOW UTAMA DENGAN WINDUI
+local Window = WindUI:CreateWindow({
+    Title = "loc:WINDOW_TITLE",
+    Author = "loc:AUTHOR_TEXT",
+    Icon = "rbxassetid://100551332272077",
+    Folder = ".JoyHub/KeySystem",
+    Transparent = false,
+    Size = UDim2.fromOffset(450, 250),
+    Resizable = false,
+    SideBarWidth = 150,
+    HideSearchBar = false,
+    ScrollBarEnabled = true,
+    Theme = "joyitem",
+    OpenButton = {
+        Enabled = false
+    },
+    User = {
+        Enabled = true
+    }
+})
+
+Window:DisableTopbarButtons({
+    "Minimize",
+    "Fullscreen",
+})
+
+Window:Close()
+
+--// TAB UNTUK SISTEM KUNCI
+local KeyTab = Window:Tab({
+    Title = "loc:KEY_TAB_TITLE",
+    Icon = "key",
+    Locked = false
+})
+KeyTab:Select()
+
+local KeyInput = KeyTab:Input({
+    Title = "loc:KEY_TAB_TITLE",
+    Desc = "loc:KEY_INPUT_DESC",
+    Value = "",
+    InputIcon = "key",
+    Type = "Input",
+    Placeholder = "ziaan-xxxx",
+    Callback = function() end
+})
+
+KeyTab:Divider()
+
+KeyTab:Button({
+    Title = "loc:GET_LINK_BUTTON_TITLE",
+    Desc = "loc:GET_LINK_BUTTON_DESC",
+    Icon = "link",
+    Callback = function()
+        local success, result = GetSafelinkuLink()
+        if success then
+            if setclipboard then
+                NotifyPesan("loc:NOTIFY_LINK_COPIED", "berhasil")
+            else
+                NotifyPesan("loc:NOTIFY_LINK_COPIED", "info", " " .. result)
+            end
+        else
+            NotifyPesan("loc:NOTIFY_LINK_FAIL", "gagal", tostring(result))
+        end
+    end
+})
+
+KeyTab:Button({
+    Title = "loc:SUBMIT_KEY_BUTTON_TITLE",
+    Desc = "loc:SUBMIT_KEY_BUTTON_DESC",
+    Icon = "check-circle",
+    Callback = function()
+        local key = KeyInput.Value:gsub("%s+", "")
+        if key == "" then
+            NotifyPesan("loc:NOTIFY_ENTER_KEY", "error")
+            return
+        end
+
+        Window:Close()
+
+        NotifyPesan("loc:NOTIFY_VALIDATING", "info")
+
+        task.spawn(function()
+            local isValid, err = ValidateKeyWithAPI(key)
+
+            if isValid == true then
+                SaveKey(key)
+                NotifyPesan("loc:NOTIFY_VALID_SUCCESS", "berhasil")
+                Window:Destroy()
+                main()
+            else
+                DeleteKey()
+                if isValid == false then
+                    NotifyPesan("loc:NOTIFY_INVALID_KEY", "error")
+                else
+                    NotifyPesan("loc:NOTIFY_VALID_FAIL", "error", tostring(err))
+                end
+                Window:Open()
+            end
+        end)
+    end
+})
+
+Window:Divider()
+
+--// TAB KREDIT
+local InfoTab = Window:Tab({
+    Title = "loc:CREDITS_TAB_TITLE",
+    Icon = "users",
+    Locked = false
+})
+
+InfoTab:Paragraph({
+    Title = "loc:DISCORD_PARAGRAPH_TITLE",
+    Desc = "loc:DISCORD_PARAGRAPH_DESC",
+    Image = "rbxassetid://93166466679746",
+    ImageSize = 30,
+    Thumbnail = "https://vexusware.github.io/aset/public.png",
+    ThumbnailSize = 105,
+    Buttons = {
+        {
+            Icon = "copy",
+            Title = "loc:COPY_BUTTON_TITLE",
+            Callback = function()
+                setclipboard("https://discord.gg/CTDSKqvNmN")
+                WindUI:Notify({ Title = getText("loc:COPY_NOTIFY_TITLE"), Content = getText("loc:COPY_NOTIFY_CONTENT"), Duration = 3 })
+            end,
+        }
+    }
+})
+
+--// CEK KUNCI TERSIMPAN SAAT MULAI
+local function CheckSavedKey()
+    local savedKey = LoadKey()
+    if savedKey then
+        KeyInput.Value = savedKey
+        NotifyPesan("loc:NOTIFY_CHECKING_SAVED", "info")
+        
+        task.spawn(function()
+            local isValid = ValidateKeyWithAPI(savedKey)
+            if isValid == true then
+                task.wait(1)
+                NotifyPesan("loc:NOTIFY_SAVED_VALID", "berhasil")
+                task.wait(1)
+                Window:Destroy()
+                main()
+            else
+                DeleteKey()
+                KeyInput.Value = ""
+                NotifyPesan("loc:NOTIFY_SAVED_EXPIRED", "peringatan")
+                Window:Open()
+            end
+        end)
+    else
+        Window:Open()
+    end
+end
+
+task.wait(0.5)
+CheckSavedKey()
+
