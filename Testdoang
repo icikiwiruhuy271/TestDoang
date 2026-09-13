@@ -21,8 +21,8 @@ Onyx.Links = {
 
 Onyx.Storage = {
     FileName = "joyhub_key",
-    Remember = false,
-    AutoLoad = false,
+    Remember = true,
+    AutoLoad = true,
 }
 
 Onyx.Shop = {
