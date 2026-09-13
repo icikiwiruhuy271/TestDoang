@@ -1,0 +1,52 @@
+-- ==============================================
+-- KEY SYSTEM - Oxio HUB
+-- ==============================================
+
+-- LOAD SISTEM KEY
+local Onyx = loadstring(game:HttpGet("https://cdn.jnkie.com/OnyxUI.lua"))()
+
+-- KONFIGURASI
+Onyx.Appearance = {
+    Title = " Oxio HUB ",
+    Subtitle = "Enter your key to continue",
+    KeylessTitle = "Oxio HUB ",
+    KeylessSubtitle = "No key required for this build - you're verified.",
+    Icon = "rbxassetid://118755181202304",
+}
+
+Onyx.Links = {
+    GetKey = "https://discord.gg/oxiohub",
+    Discord = "https://discord.gg/oxiohub",
+}
+
+Onyx.Storage = {
+    FileName = "oxiohub_key",
+    Remember = true,
+    AutoLoad = true,
+}
+
+Onyx.Shop = {
+    Enabled = false,
+    Icon = "",
+    Title = "Get Key",
+    Subtitle = "Buy VIP key",
+    ButtonText = "Buy",
+    Link = "https://discord.gg/oxiohub"
+}
+
+-- 3. SCRIPT UTAMA
+local function MainScript()
+    print("✅ Key valid! Script loaded!")
+    loadstring(game:HttpGet("https://joyhub-vd.vercel.app/src/secret/api/AutoParry"))()
+end
+
+-- 4. JALANKAN SISTEM KEY
+Onyx.Callbacks.OnSuccess = function()
+    MainScript()
+end
+
+Onyx:LaunchJunkie({
+    Service = "JoyHub",
+    Identifier = "1173347",
+    Provider = "JoyHub"
+})
