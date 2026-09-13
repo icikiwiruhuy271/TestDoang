@@ -4,7 +4,7 @@
 -- ==============================================
 
 -- LOAD SISTEM KEY
-local Arqel = loadstring(game:HttpGet("https://cdn.jnkie.com/OnyxUI.lua"))()
+local Arqel = loadstring(game:HttpGet("https://cdn.jnkie.com/arquelui.lua"))()
 
 -- KONFIGURASI
 Arqel.Appearance = {
@@ -21,7 +21,7 @@ Arqel.Links = {
 }
 
 Arqel.Storage = {
-    FileName = "joyhub_key",
+    FileName = "Jnkie_key",
     Remember = true,
     AutoLoad = true,
 }
