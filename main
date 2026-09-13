@@ -379,7 +379,7 @@ local KeyInput = KeyTab:Input({
     Value = "",
     InputIcon = "key",
     Type = "Input",
-    Placeholder = "ziaan-xxxx",
+    Placeholder = "joyhub-xxxx",
     Callback = function() end
 })
 
