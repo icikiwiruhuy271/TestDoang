@@ -1,0 +1,53 @@
+
+-- ==============================================
+-- KEY SYSTEM - Joy HUB
+-- ==============================================
+
+-- LOAD SISTEM KEY
+local Arqel = loadstring(game:HttpGet("https://cdn.jnkie.com/ArqelUI.lua"))()
+
+-- KONFIGURASI
+Arqel.Appearance = {
+    Title = " Joy HUB ",
+    Subtitle = "Enter your key to continue",
+    KeylessTitle = "Joy HUB ",
+    KeylessSubtitle = "No key required for this build - you're verified.",
+    Icon = "rbxassetid://118755181202304",
+}
+
+Arqel.Links = {
+    GetKey = "https://discord.gg/JoyHub",
+    Discord = "https://discord.gg/JoyHub",
+}
+
+Arqel.Storage = {
+    FileName = "JoyHub_key",
+    Remember = true,
+    AutoLoad = true,
+}
+
+Arqel.Shop = {
+    Enabled = false,
+    Icon = "",
+    Title = "Get Key",
+    Subtitle = "Buy VIP key",
+    ButtonText = "Buy",
+    Link = "https://discord.gg/JoyHub"
+}
+
+-- 3. SCRIPT UTAMA
+local function MainScript()
+    print("✅ Key valid! Script loaded!")
+    loadstring(game:HttpGet("https://joyhub-vd.vercel.app/src/secret/api/AutoGene"))()
+end
+
+-- 4. JALANKAN SISTEM KEY
+Arqel.Callbacks.OnSuccess = function()
+    MainScript()
+end
+
+Arqel:LaunchJunkie({
+    Service = "JoyHub",
+    Identifier = "1187607",
+    Provider = "JoyHub"
+})
