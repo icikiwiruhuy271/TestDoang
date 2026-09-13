@@ -1,6 +1,6 @@
 --// KONFIGURASI AWAL
 Config = {
-    api = "6e6c6dad-580a-4c9d-b0c5-73a6a121fd58",
+    api = "0114a695-9c77-4bb4-a313-252f030d96ab",
     service = "JoyHub"
 }
 
