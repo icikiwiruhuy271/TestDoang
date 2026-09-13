@@ -7,9 +7,9 @@ local Onyx = loadstring(game:HttpGet("https://cdn.jnkie.com/OnyxUI.lua"))()
 
 -- KONFIGURASI
 Onyx.Appearance = {
-    Title = " Oxio HUB ",
+    Title = " JoyHub",
     Subtitle = "Enter your key to continue",
-    KeylessTitle = "Oxio HUB ",
+    KeylessTitle = "JoyHub",
     KeylessSubtitle = "No key required for this build - you're verified.",
     Icon = "rbxassetid://118755181202304",
 }
@@ -20,7 +20,7 @@ Onyx.Links = {
 }
 
 Onyx.Storage = {
-    FileName = "oxiohub_key",
+    FileName = "joyhub_key",
     Remember = true,
     AutoLoad = true,
 }
